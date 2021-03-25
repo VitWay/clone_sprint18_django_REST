@@ -30,11 +30,20 @@ class CustomUser(AbstractBaseUser):
         param updated_at: Describes the date when the user was modified
         type updated_at: int (timestamp)
         param role: user role, default role (0, 'visitor')
-        type updated_at: int (choices)
+        type role: int (choices)
         param is_active: user role, default value False
-        type updated_at: bool
+        type is_active: bool
 
     """
+    first_name = models.CharField(blank=True, max_length=20)
+    last_name = models.CharField(blank=True, max_length=20)
+    middle_name = models.CharField(blank=True, max_length=20)
+    email = models.EmailField(unique=True, max_length=100, validators=[validate_email])
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    updated_at = models.DateTimeField(auto_now=True)
+    role = models.IntegerField(choices=ROLE_CHOICES, default=ROLE_CHOICES[0][0])
+    is_active = models.BooleanField(default=False)
+
 
 
     def __str__(self):
