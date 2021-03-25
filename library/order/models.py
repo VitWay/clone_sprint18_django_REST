@@ -7,6 +7,11 @@ import datetime
 
 
 class Order(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    end_at = models.DateTimeField(null=True)
+    plated_end_at = models.DateTimeField(null=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL)
+    book = models.ForeignKey(Book, on_delete=models.SET_NULL)
 
 
     def __str__(self):

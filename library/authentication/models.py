@@ -35,6 +35,15 @@ class CustomUser(AbstractBaseUser):
         type updated_at: bool
 
     """
+    first_name = models.CharField(blank=True, max_length=20)
+    last_name = models.CharField(blank=True, max_length=20)
+    middle_name = models.CharField(blank=True, max_length=20)
+    email = models.EmailField(unique=True, max_length=100, validators=[validate_email])
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    updated_at = models.DateTimeField(auto_now=True)
+    role = models.CharField(choices=ROLE_CHOICES, default=ROLE_CHOICES[0])
+    is_active = models.BooleanField(default=False)
+
 
 
     def __str__(self):
