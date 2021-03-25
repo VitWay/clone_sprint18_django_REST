@@ -152,47 +152,47 @@ class TestCustomUserModel(TestCase):
                           email='testrole@mail.com', password='1234', first_name='fname',
                           middle_name='mname', last_name='lname', role=1)
 
-    # def test_to_dict(self):
-    #     """ Test of the CustomUser.create() method """
-    #     user_returned = CustomUser.objects.get(id=111)
-    #     user_to_expect = {'id': 111,
-    #                       'first_name': 'fname',
-    #                       'middle_name': 'mname',
-    #                       'last_name': 'lname',
-    #                       'email': 'email@mail.com',
-    #                       'created_at': 1491825600,
-    #                       'updated_at': 1491825600,
-    #                       'role': 0,
-    #                       'is_active': False}
-    #     self.assertEqual(user_returned.to_dict(), user_to_expect)
-    #
-    # def test_update_full(self):
-    #     """ Test of the CustomUser.create(args) method """
-    #     user_to_update = CustomUser.objects.get(id=4)
-    #     user_to_update.update('John', 'Smith', 'Jr.', '123456', 1, True)
-    #     user_to_expect = CustomUser(id=4,
-    #                                 password='123456',
-    #                                 first_name='John',
-    #                                 middle_name='mnSmithame',
-    #                                 last_name='Jr.',
-    #                                 role=1,
-    #                                 is_active=True)
-    #     self.assertEqual(user_to_update, user_to_expect)
-    #
-    # def test_update_first_name_and_role(self):
-    #     """ Test of the CustomUser.create(args) method """
-    #     user_to_update = CustomUser.objects.get(id=4)
-    #     user_to_expect = CustomUser(first_name='John',
-    #                                 role=0,
-    #                                 id=user_to_update.id,
-    #                                 password=user_to_update.password,
-    #                                 middle_name=user_to_update.middle_name,
-    #                                 last_name=user_to_update.last_name,
-    #                                 is_active=user_to_update.is_active)
-    #     user_to_update.update(first_name='John', role=0)
-    #     user_to_update = CustomUser.objects.get(id=4)
-    #     self.assertEqual(user_to_update, user_to_expect)
-    #
+    def test_to_dict(self):
+        """ Test of the CustomUser.create() method """
+        user_returned = CustomUser.objects.get(id=111)
+        user_to_expect = {'id': 111,
+                          'first_name': 'fname',
+                          'middle_name': 'mname',
+                          'last_name': 'lname',
+                          'email': 'email@mail.com',
+                          'created_at': 1491825600,
+                          'updated_at': 1491825600,
+                          'role': 0,
+                          'is_active': False}
+        self.assertEqual(user_returned.to_dict(), user_to_expect)
+
+    def test_update_full(self):
+        """ Test of the CustomUser.create(args) method """
+        user_to_update = CustomUser.objects.get(id=4)
+        user_to_update.update('John', 'Smith', 'Jr.', '123456', 1, True)
+        user_to_expect = CustomUser(id=4,
+                                    password='123456',
+                                    first_name='John',
+                                    middle_name='mnSmithame',
+                                    last_name='Jr.',
+                                    role=1,
+                                    is_active=True)
+        self.assertEqual(user_to_update, user_to_expect)
+
+    def test_update_first_name_and_role(self):
+        """ Test of the CustomUser.create(args) method """
+        user_to_update = CustomUser.objects.get(id=4)
+        user_to_expect = CustomUser(first_name='John',
+                                    role=0,
+                                    id=user_to_update.id,
+                                    password=user_to_update.password,
+                                    middle_name=user_to_update.middle_name,
+                                    last_name=user_to_update.last_name,
+                                    is_active=user_to_update.is_active)
+        user_to_update.update(first_name='John', role=0)
+        user_to_update = CustomUser.objects.get(id=4)
+        self.assertEqual(user_to_update, user_to_expect)
+
     # def test_get_all_users(self):
     #     """ Test of the CustomUser.get_all() method """
     #     expected_value = CustomUser.objects.all()

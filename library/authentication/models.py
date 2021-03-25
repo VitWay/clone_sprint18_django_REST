@@ -44,8 +44,6 @@ class CustomUser(AbstractBaseUser):
     role = models.IntegerField(choices=ROLE_CHOICES, default=ROLE_CHOICES[0][0])
     is_active = models.BooleanField(default=False)
 
-
-
     def __str__(self):
         """
         Magic method is redefined to show all information about CustomUser.
@@ -70,7 +68,6 @@ class CustomUser(AbstractBaseUser):
         """
         return f'{self.__class__.__name__}(id={self.id})'
 
-
     @staticmethod
     def get_by_id(user_id):
         """
@@ -82,9 +79,6 @@ class CustomUser(AbstractBaseUser):
         except CustomUser.DoesNotExist:
             user = None
         return user
-
-
-
 
     @staticmethod
     def get_by_email(email):
@@ -100,7 +94,6 @@ class CustomUser(AbstractBaseUser):
             user = None
         return user
 
-
     @staticmethod
     def delete_by_id(user_id):
         """
@@ -113,8 +106,6 @@ class CustomUser(AbstractBaseUser):
             return True
         except CustomUser.DoesNotExist:
             return False
-
-
 
     @staticmethod
     def create(email, password, first_name=None, middle_name=None, last_name=None):
@@ -133,15 +124,13 @@ class CustomUser(AbstractBaseUser):
         """
 
         try:
+
             validate_email(email)
             user = CustomUser.objects.create(email=email, password=password,
                                              first_name=first_name, middle_name=middle_name, last_name=last_name)
             return user
         except (DataError, IntegrityError, ValidationError):
             pass
-
-
-
 
     def to_dict(self):
         """
@@ -160,8 +149,17 @@ class CustomUser(AbstractBaseUser):
         |   'is_active:' True
         | }
         """
-
-
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'middle_name': self.middle_name,
+            'last_name': self.last_name,
+            'email' : self.email,
+            'created_at': int(self.created_at.timestamp()),
+            'updated_at': int(self.updated_at.timestamp()),
+            'role': self.role,
+            'is_active': self.is_active
+        }
 
     def update(self,
                first_name=None,
@@ -186,8 +184,18 @@ class CustomUser(AbstractBaseUser):
         :type is_active: bool
         :return: None
         """
-
-
+        if first_name and len(first_name) <= 20:
+            self.first_name = first_name
+        if last_name and len(last_name) <= 20:
+            self.last_name = last_name
+        if middle_name and len(middle_name) <= 20:
+            self.middle_name = middle_name
+        if password:
+            self.set_password(password)
+        if role and isinstance(role, int):
+            self.role = role
+        if is_active is not None:
+            self.is_active = is_active
 
     @staticmethod
     def get_all():
@@ -195,9 +203,7 @@ class CustomUser(AbstractBaseUser):
         returns data for json request with QuerySet of all users
         """
 
-
     def get_role_name(self):
         """
         returns str role name
         """
-
