@@ -108,6 +108,11 @@ class CustomUser(AbstractBaseUser):
         :type user_id: int
         :return: True if object existed in the db and was removed or False if it didn't exist
         """
+        try:
+            CustomUser.objects.get(id=user_id).delete()
+            return True
+        except CustomUser.DoesNotExist:
+            return False
 
 
 
@@ -126,6 +131,7 @@ class CustomUser(AbstractBaseUser):
         :type password: str
         :return: a new user object which is also written into the DB
         """
+
 
 
     def to_dict(self):

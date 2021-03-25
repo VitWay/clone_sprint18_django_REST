@@ -96,15 +96,15 @@ class TestCustomUserModel(TestCase):
         user_to_expect = CustomUser.get_by_email('doesnotexist@mail.com')
         self.assertIsNone(user_to_expect)
 
-    # def test_delete_by_id_positive(self):
-    #     """ Test of the CustomUser.delete_by_id() method """
-    #     self.assertTrue(CustomUser.delete_by_id(4))
-    #     self.assertRaises(CustomUser.DoesNotExist, CustomUser.objects.get, pk=4)
-    #
-    # def test_delete_by_id_negative(self):
-    #     """ Test of the CustomUser.delete_by_id() method """
-    #     self.assertFalse(CustomUser.delete_by_id(41))
-    #
+    def test_delete_by_id_positive(self):
+        """ Test of the CustomUser.delete_by_id() method """
+        self.assertTrue(CustomUser.delete_by_id(4))
+        self.assertRaises(CustomUser.DoesNotExist, CustomUser.objects.get, pk=4)
+
+    def test_delete_by_id_negative(self):
+        """ Test of the CustomUser.delete_by_id() method """
+        self.assertFalse(CustomUser.delete_by_id(41))
+
     # def test_create_positive(self):
     #     """ Positive Test of the CustomUser.create method """
     #     time_mock = datetime.datetime(2017, 4, 10, 12, 00, tzinfo=pytz.utc)
