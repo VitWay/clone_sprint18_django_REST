@@ -59,25 +59,25 @@ class TestCustomUserModel(TestCase):
 
         self.assertEqual(user_returned, user_to_expect)
 
-    # def test_get_by_id_positive(self):
-    #     """Positive test of the CustomUser.get_by_id() method"""
-    #     user_returned = CustomUser.get_by_id(111)
-    #     self.assertEqual(user_returned.id, 111)
-    #     self.assertEqual(user_returned.email, 'email@mail.com')
-    #     self.assertEqual(user_returned.password, '1234')
-    #     self.assertEqual(user_returned.first_name, 'fname')
-    #     self.assertEqual(user_returned.middle_name, 'mname')
-    #     self.assertEqual(user_returned.last_name, 'lname')
-    #     self.assertEqual(user_returned.created_at, TEST_DATE)
-    #     self.assertEqual(user_returned.updated_at, TEST_DATE)
-    #     self.assertEqual(user_returned.role, 0)
-    #     self.assertEqual(user_returned.is_active, False)
-    #
-    # def test_get_by_id_negative(self):
-    #     """Negative test of the CustomUser.get_by_id() method"""
-    #     user_to_expect = CustomUser.get_by_id(999)
-    #     self.assertIsNone(user_to_expect)
-    #
+    def test_get_by_id_positive(self):
+        """Positive test of the CustomUser.get_by_id() method"""
+        user_returned = CustomUser.get_by_id(111)
+        self.assertEqual(user_returned.id, 111)
+        self.assertEqual(user_returned.email, 'email@mail.com')
+        self.assertEqual(user_returned.password, '1234')
+        self.assertEqual(user_returned.first_name, 'fname')
+        self.assertEqual(user_returned.middle_name, 'mname')
+        self.assertEqual(user_returned.last_name, 'lname')
+        self.assertEqual(user_returned.created_at, TEST_DATE)
+        self.assertEqual(user_returned.updated_at, TEST_DATE)
+        self.assertEqual(user_returned.role, 0)
+        self.assertEqual(user_returned.is_active, False)
+
+    def test_get_by_id_negative(self):
+        """Negative test of the CustomUser.get_by_id() method"""
+        user_to_expect = CustomUser.get_by_id(999)
+        self.assertIsNone(user_to_expect)
+
     # def test_get_by_email_positive(self):
     #     """Positive test of the CustomUser.get_by_email() method"""
     #     user_returned = CustomUser.get_by_email('email@mail.com')
