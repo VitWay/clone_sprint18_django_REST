@@ -105,53 +105,53 @@ class TestCustomUserModel(TestCase):
         """ Test of the CustomUser.delete_by_id() method """
         self.assertFalse(CustomUser.delete_by_id(41))
 
-    # def test_create_positive(self):
-    #     """ Positive Test of the CustomUser.create method """
-    #     time_mock = datetime.datetime(2017, 4, 10, 12, 00, tzinfo=pytz.utc)
-    #     with mock.patch('django.utils.timezone.now') as mock_time:
-    #         mock_time.return_value = time_mock
-    #         user_returned = CustomUser.create('email_new@mail.com', '1234', 'fname', 'mname', 'lname')
-    #         self.assertIsInstance(user_returned, CustomUser)
-    #         self.assertEqual(user_returned.email, 'email_new@mail.com')
-    #         self.assertEqual(user_returned.first_name, 'fname')
-    #         self.assertEqual(user_returned.middle_name, 'mname')
-    #         self.assertEqual(user_returned.last_name, 'lname')
-    #         self.assertEqual(user_returned.created_at, TEST_DATE)
-    #         self.assertEqual(user_returned.updated_at, TEST_DATE)
-    #         self.assertEqual(user_returned.role, 0)
-    #         self.assertEqual(user_returned.is_active, False)
-    #
-    # def test_create_negative_long_first_name(self):
-    #     """ Negative Test of the CustomUser.create() method """
-    #     user_returned = CustomUser.create('email_new@mail.com', '1234', 'f' * 21, 'mname', 'lname')
-    #     self.assertIsNone(user_returned)
-    #
-    # def test_create_negative_long_middle_name(self):
-    #     """ Negative Test of the CustomUser.create() method """
-    #     user_returned = CustomUser.create('email_new@mail.com', '1234', 'fname', 'm' * 21, 'lname')
-    #     self.assertIsNone(user_returned)
-    #
-    # def test_create_negative_long_last_name(self):
-    #     """ Negative Test of the CustomUser.create() method """
-    #     user_returned = CustomUser.create('email_new@mail.com', '1234', 'fname', 'mname', 'l' * 21)
-    #     self.assertIsNone(user_returned)
-    #
-    # def test_create_negative_not_valid_email(self):
-    #     """ Negative Test of the CustomUser.create() method """
-    #     expect_none = CustomUser.create('96mail.com', '1234', 'fname', 'mname', 'lname')
-    #     self.assertIsNone(expect_none)
-    #
-    # def test_create_negative_duplicate_email(self):
-    #     """ Negative Test of the CustomUser.create() method """
-    #     expect_none = CustomUser.create('email@mail.com', '1234', 'fname', 'mname', 'lname')
-    #     self.assertIsNone(expect_none)
-    #
-    # def test_create_negative_with_a_role(self):
-    #     """ Negative Test of the CustomUser.create() method """
-    #     self.assertRaises(TypeError, CustomUser.create,
-    #                       email='testrole@mail.com', password='1234', first_name='fname',
-    #                       middle_name='mname', last_name='lname', role=1)
-    #
+    def test_create_positive(self):
+        """ Positive Test of the CustomUser.create method """
+        time_mock = datetime.datetime(2017, 4, 10, 12, 00, tzinfo=pytz.utc)
+        with mock.patch('django.utils.timezone.now') as mock_time:
+            mock_time.return_value = time_mock
+            user_returned = CustomUser.create('email_new@mail.com', '1234', 'fname', 'mname', 'lname')
+            self.assertIsInstance(user_returned, CustomUser)
+            self.assertEqual(user_returned.email, 'email_new@mail.com')
+            self.assertEqual(user_returned.first_name, 'fname')
+            self.assertEqual(user_returned.middle_name, 'mname')
+            self.assertEqual(user_returned.last_name, 'lname')
+            self.assertEqual(user_returned.created_at, TEST_DATE)
+            self.assertEqual(user_returned.updated_at, TEST_DATE)
+            self.assertEqual(user_returned.role, 0)
+            self.assertEqual(user_returned.is_active, False)
+
+    def test_create_negative_long_first_name(self):
+        """ Negative Test of the CustomUser.create() method """
+        user_returned = CustomUser.create('email_new@mail.com', '1234', 'f' * 21, 'mname', 'lname')
+        self.assertIsNone(user_returned)
+
+    def test_create_negative_long_middle_name(self):
+        """ Negative Test of the CustomUser.create() method """
+        user_returned = CustomUser.create('email_new@mail.com', '1234', 'fname', 'm' * 21, 'lname')
+        self.assertIsNone(user_returned)
+
+    def test_create_negative_long_last_name(self):
+        """ Negative Test of the CustomUser.create() method """
+        user_returned = CustomUser.create('email_new@mail.com', '1234', 'fname', 'mname', 'l' * 21)
+        self.assertIsNone(user_returned)
+
+    def test_create_negative_not_valid_email(self):
+        """ Negative Test of the CustomUser.create() method """
+        expect_none = CustomUser.create('96mail.com', '1234', 'fname', 'mname', 'lname')
+        self.assertIsNone(expect_none)
+
+    def test_create_negative_duplicate_email(self):
+        """ Negative Test of the CustomUser.create() method """
+        expect_none = CustomUser.create('email@mail.com', '1234', 'fname', 'mname', 'lname')
+        self.assertIsNone(expect_none)
+
+    def test_create_negative_with_a_role(self):
+        """ Negative Test of the CustomUser.create() method """
+        self.assertRaises(TypeError, CustomUser.create,
+                          email='testrole@mail.com', password='1234', first_name='fname',
+                          middle_name='mname', last_name='lname', role=1)
+
     # def test_to_dict(self):
     #     """ Test of the CustomUser.create() method """
     #     user_returned = CustomUser.objects.get(id=111)

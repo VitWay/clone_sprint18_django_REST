@@ -132,6 +132,15 @@ class CustomUser(AbstractBaseUser):
         :return: a new user object which is also written into the DB
         """
 
+        try:
+            validate_email(email)
+            user = CustomUser.objects.create(email=email, password=password,
+                                             first_name=first_name, middle_name=middle_name, last_name=last_name)
+            return user
+        except (DataError, IntegrityError, ValidationError):
+            pass
+
+
 
 
     def to_dict(self):
