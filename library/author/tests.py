@@ -91,16 +91,16 @@ class TestAuthorModel(TestCase):
     #     self.assertTrue(Author.delete_by_id(101))
     #     self.assertRaises(Author.DoesNotExist, Author.objects.get, pk=101)
 
-    def test_delete_by_id_negative(self):
-        """ Test of the CustomUser.delete_by_id() method """
-        self.assertFalse(Author.delete_by_id(999))
+    # def test_delete_by_id_negative(self):
+    #     """ Test of the CustomUser.delete_by_id() method """
+    #     self.assertFalse(Author.delete_by_id(999))
 
     # def test_get_all(self):
     #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
     #     authors = list(Author.get_all())
     #     authors.sort(key=lambda author: author.id)
     #     self.assertListEqual(authors, [self.author1, self.author2])
-    #
+
     # def test_update(self):
     #     author = Author.objects.get(id=101)
     #     author.update(name="testName", surname="testSurname", patronymic="testPatronymic")

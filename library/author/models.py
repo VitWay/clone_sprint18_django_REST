@@ -74,7 +74,7 @@ class Author(models.Model):
         type patronymic: str max_length=20
         :return: a new author object which is also written into the DB
         """
-
+        return Author.objects.create(name=name, surname=surname, patronymic=patronymic)
 
     def to_dict(self):
         """
@@ -112,4 +112,4 @@ class Author(models.Model):
         """
         returns data for json request with QuerySet of all authors
         """
-
+        return Author.objects.all()
