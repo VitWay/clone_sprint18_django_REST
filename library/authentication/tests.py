@@ -199,12 +199,12 @@ class TestCustomUserModel(TestCase):
         current_value = CustomUser.get_all()
         self.assertListEqual(list(current_value), list(expected_value))
 
-    # def test_get_role_name_visitor(self):
-    #     """ Test of the CustomUser.get_all() method """
-    #     expected_value = CustomUser.objects.get(id=111).get_role_name()
-    #     self.assertEqual('visitor', expected_value)
-    #
-    # def test_get_role_name_admin(self):
-    #     """ Test of the CustomUser.get_all() method """
-    #     expected_value = CustomUser.objects.get(id=4).get_role_name()
-    #     self.assertEqual('admin', expected_value)
+    def test_get_role_name_visitor(self):
+        """ Test of the CustomUser.get_all() method """
+        expected_value = CustomUser.objects.get(id=111).get_role_name()
+        self.assertEqual('visitor', expected_value)
+
+    def test_get_role_name_admin(self):
+        """ Test of the CustomUser.get_all() method """
+        expected_value = CustomUser.objects.get(id=4).get_role_name()
+        self.assertEqual('admin', expected_value)
