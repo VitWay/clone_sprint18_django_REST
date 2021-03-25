@@ -42,10 +42,9 @@ class Author(models.Model):
         :return: author object or None if a user with such ID does not exist
         """
         try:
-            author = Author.objects.get(id=author_id)
-        except Exception:
-            author = None
-        return author
+            return Author.objects.get(id=author_id)
+        except Author.DoesNotExist:
+            return None
 
 
     @staticmethod
@@ -55,6 +54,11 @@ class Author(models.Model):
         :type author_id: int
         :return: True if object existed in the db and was removed or False if it didn't exist
         """
+        try:
+            Author.objects.get(id=author_id).delete()
+            return True
+        except Author.DoesNotExist:
+            return False
 
 
 

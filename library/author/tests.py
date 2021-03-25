@@ -72,7 +72,7 @@ class TestAuthorModel(TestCase):
     #     author_to_expect = "Author(id=102)"
     #
     #     self.assertEqual(author_returned, author_to_expect)
-
+    #
     # def test_get_by_id_positive(self):
     #     """Positive test of the CustomUser.get_by_id() method"""
     #     author = Author.get_by_id(101)
@@ -85,16 +85,16 @@ class TestAuthorModel(TestCase):
     #     """Negative test of the CustomUser.get_by_id() method"""
     #     author = Author.get_by_id(999)
     #     self.assertIsNone(author)
-
-    def test_delete_by_id_positive(self):
-        """ Test of the CustomUser.delete_by_id() method """
-        self.assertTrue(Author.delete_by_id(101))
-        self.assertRaises(Author.DoesNotExist, Author.objects.get, pk=101)
-
-    # def test_delete_by_id_negative(self):
-    #     """ Test of the CustomUser.delete_by_id() method """
-    #     self.assertFalse(Author.delete_by_id(999))
     #
+    # def test_delete_by_id_positive(self):
+    #     """ Test of the CustomUser.delete_by_id() method """
+    #     self.assertTrue(Author.delete_by_id(101))
+    #     self.assertRaises(Author.DoesNotExist, Author.objects.get, pk=101)
+
+    def test_delete_by_id_negative(self):
+        """ Test of the CustomUser.delete_by_id() method """
+        self.assertFalse(Author.delete_by_id(999))
+
     # def test_get_all(self):
     #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
     #     authors = list(Author.get_all())
