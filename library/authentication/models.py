@@ -94,6 +94,11 @@ class CustomUser(AbstractBaseUser):
         :type email: str
         :return: user object or None if a user with such ID does not exist
         """
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist:
+            user = None
+        return user
 
 
     @staticmethod
