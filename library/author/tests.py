@@ -110,7 +110,7 @@ class TestAuthorModel(TestCase):
     #     self.assertEqual(author.name, "testName")
     #     self.assertEqual(author.surname, "testSurname")
     #     self.assertEqual(author.patronymic, "testPatronymic")
-    #
+
     # def test_update_only_name(self):
     #     author = Author.objects.get(id=101)
     #     author.update(name="testName")
@@ -131,14 +131,14 @@ class TestAuthorModel(TestCase):
     #     self.assertEqual(author.surname, "s1")
     #     self.assertEqual(author.patronymic, "p1")
     #
-    # def test_create(self):
-    #     author = Author.create(name="testName", surname="s1", patronymic="p1")
-    #     author = Author.objects.get(id=author.id)
-    #     self.assertIsInstance(author, Author)
-    #     self.assertEqual(author.name, "testName")
-    #     self.assertEqual(author.surname, "s1")
-    #     self.assertEqual(author.patronymic, "p1")
-    #
-    # def test_createnot_valid_surname(self):
-    #     author = Author.create(name="testName", surname="s1" * 20, patronymic="p1")
-    #     self.assertIsNone(author)
+    def test_create(self):
+        author = Author.create(name="testName", surname="s1", patronymic="p1")
+        author = Author.objects.get(id=author.id)
+        self.assertIsInstance(author, Author)
+        self.assertEqual(author.name, "testName")
+        self.assertEqual(author.surname, "s1")
+        self.assertEqual(author.patronymic, "p1")
+
+    def test_createnot_valid_surname(self):
+        author = Author.create(name="testName", surname="s1" * 20, patronymic="p1")
+        self.assertIsNone(author)

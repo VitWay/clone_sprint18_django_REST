@@ -74,7 +74,10 @@ class Author(models.Model):
         type patronymic: str max_length=20
         :return: a new author object which is also written into the DB
         """
-        return Author.objects.create(name=name, surname=surname, patronymic=patronymic)
+        try:
+            return Author.objects.create(name=name, surname=surname, patronymic=patronymic)
+        except DataError:
+            return None
 
     def to_dict(self):
         """
