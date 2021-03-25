@@ -90,7 +90,12 @@ class Author(models.Model):
         |   'patronymic': 'ln',
         | }
         """
-
+        return {
+            'id': self.id,
+            'name': self.name,
+            'surname': self.surname,
+            'patronymic': self.patronymic,
+        }
 
 
     def update(self,
@@ -107,6 +112,13 @@ class Author(models.Model):
         type patronymic: str max_length=20
         :return: None
         """
+        if name and len(name) <= 20 and isinstance(name, str):
+            self.name = name
+        if surname and len(surname) <= 20 and isinstance(surname, str):
+            self.surname = surname
+        if patronymic and len(patronymic) <= 20 and isinstance(patronymic, str):
+            self.patronymic = patronymic
+        self.save()
 
 
 
