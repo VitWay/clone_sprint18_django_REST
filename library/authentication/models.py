@@ -44,8 +44,6 @@ class CustomUser(AbstractBaseUser):
     role = models.IntegerField(choices=ROLE_CHOICES, default=ROLE_CHOICES[0][0])
     is_active = models.BooleanField(default=False)
 
-
-
     def __str__(self):
         """
         Magic method is redefined to show all information about CustomUser.
@@ -53,14 +51,22 @@ class CustomUser(AbstractBaseUser):
                  user email, user password, user updated_at, user created_at,
                  user role, user is_active
         """
-
+        return f"'id': {self.id}, " \
+               f"'first_name': '{self.first_name}', " \
+               f"'middle_name': '{self.middle_name}', " \
+               f"'last_name': '{self.last_name}', " \
+               f"'email': '{self.email}', " \
+               f"'created_at': {int(self.created_at.timestamp())}, " \
+               f"'updated_at': {int(self.updated_at.timestamp())}, " \
+               f"'role': {self.role}, " \
+               f"'is_active': {self.is_active}"
 
     def __repr__(self):
         """
         This magic method is redefined to show class and id of CustomUser object.
         :return: class, id
         """
-
+        return f'{self.__class__.__name__}(id={self.id})'
 
     @staticmethod
     def get_by_id(user_id):
@@ -68,7 +74,11 @@ class CustomUser(AbstractBaseUser):
         :param user_id: SERIAL: the id of a user to be found in the DB
         :return: user object or None if a user with such ID does not exist
         """
-
+        try:
+            user = CustomUser.objects.get(id=user_id)
+        except CustomUser.DoesNotExist:
+            user = None
+        return user
 
     @staticmethod
     def get_by_email(email):
@@ -78,7 +88,11 @@ class CustomUser(AbstractBaseUser):
         :type email: str
         :return: user object or None if a user with such ID does not exist
         """
-
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist:
+            user = None
+        return user
 
     @staticmethod
     def delete_by_id(user_id):
@@ -87,8 +101,11 @@ class CustomUser(AbstractBaseUser):
         :type user_id: int
         :return: True if object existed in the db and was removed or False if it didn't exist
         """
-
-
+        try:
+            CustomUser.objects.get(id=user_id).delete()
+            return True
+        except CustomUser.DoesNotExist:
+            return False
 
     @staticmethod
     def create(email, password, first_name=None, middle_name=None, last_name=None):
@@ -106,6 +123,14 @@ class CustomUser(AbstractBaseUser):
         :return: a new user object which is also written into the DB
         """
 
+        try:
+
+            validate_email(email)
+            user = CustomUser.objects.create(email=email, password=password,
+                                             first_name=first_name, middle_name=middle_name, last_name=last_name)
+            return user
+        except (DataError, IntegrityError, ValidationError):
+            pass
 
     def to_dict(self):
         """
@@ -124,8 +149,17 @@ class CustomUser(AbstractBaseUser):
         |   'is_active:' True
         | }
         """
-
-
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'middle_name': self.middle_name,
+            'last_name': self.last_name,
+            'email' : self.email,
+            'created_at': int(self.created_at.timestamp()),
+            'updated_at': int(self.updated_at.timestamp()),
+            'role': self.role,
+            'is_active': self.is_active
+        }
 
     def update(self,
                first_name=None,
@@ -150,18 +184,29 @@ class CustomUser(AbstractBaseUser):
         :type is_active: bool
         :return: None
         """
-
-
+        if first_name and len(first_name) <= 20:
+            self.first_name = first_name
+        if last_name and len(last_name) <= 20:
+            self.last_name = last_name
+        if middle_name and len(middle_name) <= 20:
+            self.middle_name = middle_name
+        if password:
+            self.set_password(password)
+        if role and isinstance(role, int):
+            self.role = role
+        if is_active is not None:
+            self.is_active = is_active
 
     @staticmethod
     def get_all():
         """
         returns data for json request with QuerySet of all users
         """
-
+        return CustomUser.objects.all()
 
     def get_role_name(self):
         """
         returns str role name
         """
-
+        role = ROLE_CHOICES[self.role][1]
+        return role
