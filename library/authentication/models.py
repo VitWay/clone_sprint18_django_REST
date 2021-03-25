@@ -53,13 +53,22 @@ class CustomUser(AbstractBaseUser):
                  user email, user password, user updated_at, user created_at,
                  user role, user is_active
         """
-
+        return f"'id': {self.id}, " \
+               f"'first_name': '{self.first_name}', " \
+               f"'middle_name': '{self.middle_name}', " \
+               f"'last_name': '{self.last_name}', " \
+               f"'email': '{self.email}', " \
+               f"'created_at': {int(self.created_at.timestamp())}, " \
+               f"'updated_at': {int(self.updated_at.timestamp())}, " \
+               f"'role': {self.role}, " \
+               f"'is_active': {self.is_active}"
 
     def __repr__(self):
         """
         This magic method is redefined to show class and id of CustomUser object.
         :return: class, id
         """
+        return f'{self.__class__.__name__}(id={self.id})'
 
 
     @staticmethod
