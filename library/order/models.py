@@ -63,7 +63,7 @@ class Order(models.Model):
 
     @staticmethod
     def get_not_returned_books():
-        pass
+        return [order for order in Order.get_all() if order.end_at is None]
 
     @staticmethod
     def delete_by_id(order_id):
