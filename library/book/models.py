@@ -101,7 +101,13 @@ class Book(models.Model):
         |   'authors': []
         | }
         """
-
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'count': self.count,
+            'authors': self.authors
+        }
 
 
     def update(self, name=None, description=None, count=None):
@@ -115,7 +121,13 @@ class Book(models.Model):
         type count: int default=10
         :return: None
         """
-
+        if name and len(name) <= 128 and isinstance(name, str):
+            self.name = name
+        if description and isinstance(description, str):
+            self.description = description
+        if count and isinstance(count, int):
+            self.count = count
+        self.save()
 
 
     def add_authors(self, authors):
@@ -124,6 +136,8 @@ class Book(models.Model):
         param authors: list authors
         :return: None
         """
+        for i in authors:
+            self.authors.add(i)
 
 
 
@@ -133,7 +147,8 @@ class Book(models.Model):
         param authors: list authors
         :return: None
         """
-
+        for i in authors:
+            self.authors.remove(i)
 
     @staticmethod
     def get_all():
