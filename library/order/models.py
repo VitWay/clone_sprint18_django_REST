@@ -37,6 +37,7 @@ class Order(models.Model):
 
     @staticmethod
     def create(user, book, plated_end_at):
+
         try:
             if book.count <= 1:
                 raise ValueError
@@ -62,11 +63,11 @@ class Order(models.Model):
 
     @staticmethod
     def get_all():
-        pass
+        return list(Order.objects.all())
 
     @staticmethod
     def get_not_returned_books():
-        pass
+        return [order for order in Order.get_all() if order.end_at is None]
 
     @staticmethod
     def delete_by_id(order_id):
