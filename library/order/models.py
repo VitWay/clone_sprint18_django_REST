@@ -37,7 +37,11 @@ class Order(models.Model):
 
     @staticmethod
     def create(user, book, plated_end_at):
-        pass
+        try:
+            order = Order.objects.create(user=user, book=book, plated_end_at=plated_end_at)
+            return order
+        except (DataError, IntegrityError, ValueError):
+            return None
 
     @staticmethod
     def get_by_id(order_id):

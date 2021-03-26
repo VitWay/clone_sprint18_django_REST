@@ -106,31 +106,31 @@ class TestOrderModel(TestCase):
         """ Test of the CustomUser.delete_by_id() method """
         self.assertFalse(Order.delete_by_id(999))
 
-    # def test_create_positive(self):
-    #     """ Positive Test of the CustomUser.create method """
-    #     time_mock = datetime.datetime(2017, 4, 10, 12, 00, tzinfo=pytz.utc)
-    #     with mock.patch('django.utils.timezone.now') as mock_time:
-    #         mock_time.return_value = time_mock
-    #         order = Order.create(self.user_free, self.book2, TEST_DATE_END)
-    #         self.assertIsInstance(order, Order)
-    #         self.assertEqual(order.user, self.user_free)
-    #         self.assertEqual(order.book, self.book2)
-    #         self.assertEqual(order.created_at, TEST_DATE)
-    #         self.assertIsNone(order.end_at)
-    #         self.assertEqual(order.plated_end_at, TEST_DATE_END)
-    #
-    # def test_create_negative_not_saved_user(self):
-    #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
-    #     user = CustomUser()
-    #     order = Order.create(user, self.book2, TEST_DATE_END)
-    #     self.assertIsNone(order)
-    #
-    # def test_create_negative_limit_book(self):
-    #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
-    #
-    #     order = Order.create(self.user_free, self.book1, TEST_DATE_END)
-    #     self.assertIsNone(order)
-    #
+    def test_create_positive(self):
+        """ Positive Test of the CustomUser.create method """
+        time_mock = datetime.datetime(2017, 4, 10, 12, 00, tzinfo=pytz.utc)
+        with mock.patch('django.utils.timezone.now') as mock_time:
+            mock_time.return_value = time_mock
+            order = Order.create(self.user_free, self.book2, TEST_DATE_END)
+            self.assertIsInstance(order, Order)
+            self.assertEqual(order.user, self.user_free)
+            self.assertEqual(order.book, self.book2)
+            self.assertEqual(order.created_at, TEST_DATE)
+            self.assertIsNone(order.end_at)
+            self.assertEqual(order.plated_end_at, TEST_DATE_END)
+
+    def test_create_negative_not_saved_user(self):
+        """ Positive Test of the CustomUser.create method TEST_DATE_END"""
+        user = CustomUser()
+        order = Order.create(user, self.book2, TEST_DATE_END)
+        self.assertIsNone(order)
+
+    def test_create_negative_limit_book(self):
+        """ Positive Test of the CustomUser.create method TEST_DATE_END"""
+
+        order = Order.create(self.user_free, self.book1, TEST_DATE_END)
+        self.assertIsNone(order)
+
     # def test_get_all(self):
     #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
     #     orders = Order.get_all()
