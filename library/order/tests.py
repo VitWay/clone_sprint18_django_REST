@@ -80,88 +80,88 @@ class TestOrderModel(TestCase):
 
         self.assertEqual(user_returned, user_to_expect)
 
-    def test_get_by_id_positive(self):
-        """Positive test of the CustomUser.get_by_id() method"""
-        order = Order.get_by_id(101)
-        self.assertEqual(order.id, 101)
-        self.assertEqual(order.user, self.user)
-        self.assertEqual(order.book, self.book1)
-        self.assertEqual(order.created_at, TEST_DATE)
-        self.assertEqual(order.end_at, None)
-        self.assertEqual(order.plated_end_at, TEST_DATE)
-
-    def test_get_by_id_negative(self):
-        """Negative test of the CustomUser.get_by_id() method"""
-        order = Order.get_by_id(55)
-        self.assertIsNone(order)
-
-    def test_delete_by_id_positive(self):
-        """ Test of the CustomUser.delete_by_id() method """
-        self.assertTrue(Order.delete_by_id(103))
-        self.assertRaises(Order.DoesNotExist, Order.objects.get, pk=103)
-        self.assertEqual(self.book3, Book.objects.get(id=103))
-        self.assertEqual(self.user, CustomUser.objects.get(id=111))
-
-    def test_delete_by_id_negative(self):
-        """ Test of the CustomUser.delete_by_id() method """
-        self.assertFalse(Order.delete_by_id(999))
-
-    def test_create_positive(self):
-        """ Positive Test of the CustomUser.create method """
-        time_mock = datetime.datetime(2017, 4, 10, 12, 00, tzinfo=pytz.utc)
-        with mock.patch('django.utils.timezone.now') as mock_time:
-            mock_time.return_value = time_mock
-            order = Order.create(self.user_free, self.book2, TEST_DATE_END)
-            self.assertIsInstance(order, Order)
-            self.assertEqual(order.user, self.user_free)
-            self.assertEqual(order.book, self.book2)
-            self.assertEqual(order.created_at, TEST_DATE)
-            self.assertIsNone(order.end_at)
-            self.assertEqual(order.plated_end_at, TEST_DATE_END)
-
-    def test_create_negative_not_saved_user(self):
-        """ Positive Test of the CustomUser.create method TEST_DATE_END"""
-        user = CustomUser()
-        order = Order.create(user, self.book2, TEST_DATE_END)
-        self.assertIsNone(order)
-
-    def test_create_negative_limit_book(self):
-        """ Positive Test of the CustomUser.create method TEST_DATE_END"""
-
-        order = Order.create(self.user_free, self.book1, TEST_DATE_END)
-        self.assertIsNone(order)
-
-    def test_get_all(self):
-        """ Positive Test of the CustomUser.create method TEST_DATE_END"""
-        orders = Order.get_all()
-        self.assertListEqual(orders, [self.order1, self.order2, self.order3])
-
-    def test_get_not_returned_books(self):
-        """ Positive Test of the CustomUser.create method TEST_DATE_END"""
-        orders = Order.get_not_returned_books()
-        self.assertListEqual(orders, [self.order1, self.order2])
-
-    def test_update_plated_end_at(self):
-        order = Order.objects.get(id=101)
-        new_date = TEST_DATE_END + datetime.timedelta(days=4)
-        order.update(plated_end_at=new_date)
-
-        order = Order.objects.get(id=101)
-        self.assertEqual(order.id, 101)
-        self.assertEqual(order.user, self.user)
-        self.assertEqual(order.book, self.book1)
-        self.assertEqual(order.created_at, TEST_DATE)
-        self.assertEqual(order.end_at, None)
-        self.assertEqual(order.plated_end_at, new_date)
-    def test_update_end_at(self):
-        order = Order.objects.get(id=101)
-        new_date = TEST_DATE_END + datetime.timedelta(days=4)
-        order.update(end_at=new_date)
-
-        order = Order.objects.get(id=101)
-        self.assertEqual(order.id, 101)
-        self.assertEqual(order.user, self.user)
-        self.assertEqual(order.book, self.book1)
-        self.assertEqual(order.created_at, TEST_DATE)
-        self.assertEqual(order.end_at, new_date)
-        self.assertEqual(order.plated_end_at, TEST_DATE)
+    # def test_get_by_id_positive(self):
+    #     """Positive test of the CustomUser.get_by_id() method"""
+    #     order = Order.get_by_id(101)
+    #     self.assertEqual(order.id, 101)
+    #     self.assertEqual(order.user, self.user)
+    #     self.assertEqual(order.book, self.book1)
+    #     self.assertEqual(order.created_at, TEST_DATE)
+    #     self.assertEqual(order.end_at, None)
+    #     self.assertEqual(order.plated_end_at, TEST_DATE)
+    #
+    # def test_get_by_id_negative(self):
+    #     """Negative test of the CustomUser.get_by_id() method"""
+    #     order = Order.get_by_id(55)
+    #     self.assertIsNone(order)
+    #
+    # def test_delete_by_id_positive(self):
+    #     """ Test of the CustomUser.delete_by_id() method """
+    #     self.assertTrue(Order.delete_by_id(103))
+    #     self.assertRaises(Order.DoesNotExist, Order.objects.get, pk=103)
+    #     self.assertEqual(self.book3, Book.objects.get(id=103))
+    #     self.assertEqual(self.user, CustomUser.objects.get(id=111))
+    #
+    # def test_delete_by_id_negative(self):
+    #     """ Test of the CustomUser.delete_by_id() method """
+    #     self.assertFalse(Order.delete_by_id(999))
+    #
+    # def test_create_positive(self):
+    #     """ Positive Test of the CustomUser.create method """
+    #     time_mock = datetime.datetime(2017, 4, 10, 12, 00, tzinfo=pytz.utc)
+    #     with mock.patch('django.utils.timezone.now') as mock_time:
+    #         mock_time.return_value = time_mock
+    #         order = Order.create(self.user_free, self.book2, TEST_DATE_END)
+    #         self.assertIsInstance(order, Order)
+    #         self.assertEqual(order.user, self.user_free)
+    #         self.assertEqual(order.book, self.book2)
+    #         self.assertEqual(order.created_at, TEST_DATE)
+    #         self.assertIsNone(order.end_at)
+    #         self.assertEqual(order.plated_end_at, TEST_DATE_END)
+    #
+    # def test_create_negative_not_saved_user(self):
+    #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
+    #     user = CustomUser()
+    #     order = Order.create(user, self.book2, TEST_DATE_END)
+    #     self.assertIsNone(order)
+    #
+    # def test_create_negative_limit_book(self):
+    #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
+    #
+    #     order = Order.create(self.user_free, self.book1, TEST_DATE_END)
+    #     self.assertIsNone(order)
+    #
+    # def test_get_all(self):
+    #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
+    #     orders = Order.get_all()
+    #     self.assertListEqual(orders, [self.order1, self.order2, self.order3])
+    #
+    # def test_get_not_returned_books(self):
+    #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
+    #     orders = Order.get_not_returned_books()
+    #     self.assertListEqual(orders, [self.order1, self.order2])
+    #
+    # def test_update_plated_end_at(self):
+    #     order = Order.objects.get(id=101)
+    #     new_date = TEST_DATE_END + datetime.timedelta(days=4)
+    #     order.update(plated_end_at=new_date)
+    #
+    #     order = Order.objects.get(id=101)
+    #     self.assertEqual(order.id, 101)
+    #     self.assertEqual(order.user, self.user)
+    #     self.assertEqual(order.book, self.book1)
+    #     self.assertEqual(order.created_at, TEST_DATE)
+    #     self.assertEqual(order.end_at, None)
+    #     self.assertEqual(order.plated_end_at, new_date)
+    # def test_update_end_at(self):
+    #     order = Order.objects.get(id=101)
+    #     new_date = TEST_DATE_END + datetime.timedelta(days=4)
+    #     order.update(end_at=new_date)
+    #
+    #     order = Order.objects.get(id=101)
+    #     self.assertEqual(order.id, 101)
+    #     self.assertEqual(order.user, self.user)
+    #     self.assertEqual(order.book, self.book1)
+    #     self.assertEqual(order.created_at, TEST_DATE)
+    #     self.assertEqual(order.end_at, new_date)
+    #     self.assertEqual(order.plated_end_at, TEST_DATE)
