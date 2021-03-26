@@ -13,13 +13,17 @@ class Order(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True)
 
-
     def __str__(self):
         """
         Magic method is redefined to show all information about Book.
         :return: book id, book name, book description, book count, book authors
         """
+        end_at = f"'{self.end_at}'" if self.end_at is not None else None
 
+        return f"'id': {self.id}, 'user': {self.user.__class__.__name__}(id={self.user.id})," \
+               f" 'book': {self.book.__class__.__name__}(id={self.book.id}), " \
+               f"'created_at': '{self.created_at}', 'end_at': {end_at}, " \
+               f"'plated_end_at': '{self.plated_end_at}'"
 
     def __repr__(self):
         """
@@ -27,19 +31,24 @@ class Order(models.Model):
         :return: class, id
         """
         return f'{self.__class__.__name__}(id={self.id})'
-    def to_dict(self):
 
+    def to_dict(self):
         pass
 
     @staticmethod
     def create(user, book, plated_end_at):
-        pass
-
+        try:
+            order = Order.objects.create(user=user, book=book, plated_end_at=plated_end_at)
+            return order
+        except (DataError, IntegrityError, ValueError):
+            return None
 
     @staticmethod
     def get_by_id(order_id):
-        pass
-
+        try:
+            return Order.objects.get(id=order_id)
+        except Order.DoesNotExist:
+            return None
 
     def update(self, plated_end_at=None, end_at=None):
         pass
@@ -54,4 +63,7 @@ class Order(models.Model):
 
     @staticmethod
     def delete_by_id(order_id):
-        pass
+        try:
+            return Order.objects.get(id=order_id).delete()
+        except Order.DoesNotExist:
+            return None

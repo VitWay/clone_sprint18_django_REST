@@ -131,37 +131,37 @@ class TestOrderModel(TestCase):
         order = Order.create(self.user_free, self.book1, TEST_DATE_END)
         self.assertIsNone(order)
 
-    def test_get_all(self):
-        """ Positive Test of the CustomUser.create method TEST_DATE_END"""
-        orders = Order.get_all()
-        self.assertListEqual(orders, [self.order1, self.order2, self.order3])
-
-    def test_get_not_returned_books(self):
-        """ Positive Test of the CustomUser.create method TEST_DATE_END"""
-        orders = Order.get_not_returned_books()
-        self.assertListEqual(orders, [self.order1, self.order2])
-
-    def test_update_plated_end_at(self):
-        order = Order.objects.get(id=101)
-        new_date = TEST_DATE_END + datetime.timedelta(days=4)
-        order.update(plated_end_at=new_date)
-
-        order = Order.objects.get(id=101)
-        self.assertEqual(order.id, 101)
-        self.assertEqual(order.user, self.user)
-        self.assertEqual(order.book, self.book1)
-        self.assertEqual(order.created_at, TEST_DATE)
-        self.assertEqual(order.end_at, None)
-        self.assertEqual(order.plated_end_at, new_date)
-    def test_update_end_at(self):
-        order = Order.objects.get(id=101)
-        new_date = TEST_DATE_END + datetime.timedelta(days=4)
-        order.update(end_at=new_date)
-
-        order = Order.objects.get(id=101)
-        self.assertEqual(order.id, 101)
-        self.assertEqual(order.user, self.user)
-        self.assertEqual(order.book, self.book1)
-        self.assertEqual(order.created_at, TEST_DATE)
-        self.assertEqual(order.end_at, new_date)
-        self.assertEqual(order.plated_end_at, TEST_DATE)
+    # def test_get_all(self):
+    #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
+    #     orders = Order.get_all()
+    #     self.assertListEqual(orders, [self.order1, self.order2, self.order3])
+    #
+    # def test_get_not_returned_books(self):
+    #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
+    #     orders = Order.get_not_returned_books()
+    #     self.assertListEqual(orders, [self.order1, self.order2])
+    #
+    # def test_update_plated_end_at(self):
+    #     order = Order.objects.get(id=101)
+    #     new_date = TEST_DATE_END + datetime.timedelta(days=4)
+    #     order.update(plated_end_at=new_date)
+    #
+    #     order = Order.objects.get(id=101)
+    #     self.assertEqual(order.id, 101)
+    #     self.assertEqual(order.user, self.user)
+    #     self.assertEqual(order.book, self.book1)
+    #     self.assertEqual(order.created_at, TEST_DATE)
+    #     self.assertEqual(order.end_at, None)
+    #     self.assertEqual(order.plated_end_at, new_date)
+    # def test_update_end_at(self):
+    #     order = Order.objects.get(id=101)
+    #     new_date = TEST_DATE_END + datetime.timedelta(days=4)
+    #     order.update(end_at=new_date)
+    #
+    #     order = Order.objects.get(id=101)
+    #     self.assertEqual(order.id, 101)
+    #     self.assertEqual(order.user, self.user)
+    #     self.assertEqual(order.book, self.book1)
+    #     self.assertEqual(order.created_at, TEST_DATE)
+    #     self.assertEqual(order.end_at, new_date)
+    #     self.assertEqual(order.plated_end_at, TEST_DATE)
