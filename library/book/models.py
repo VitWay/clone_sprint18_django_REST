@@ -79,6 +79,14 @@ class Book(models.Model):
         type authors: list->Author
         :return: a new book object which is also written into the DB
         """
+        try:
+            book = Book.objects.create(name=name, description=description, count=count)
+            if authors:
+                for i in authors:
+                    book.authors.add(i)
+            return book
+        except DataError:
+            return None
 
 
     def to_dict(self):
@@ -93,7 +101,13 @@ class Book(models.Model):
         |   'authors': []
         | }
         """
-
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'count': self.count,
+            'authors': self.authors
+        }
 
 
     def update(self, name=None, description=None, count=None):
@@ -107,7 +121,13 @@ class Book(models.Model):
         type count: int default=10
         :return: None
         """
-
+        if name and len(name) <= 128 and isinstance(name, str):
+            self.name = name
+        if description and isinstance(description, str):
+            self.description = description
+        if count and isinstance(count, int):
+            self.count = count
+        self.save()
 
 
     def add_authors(self, authors):
@@ -116,6 +136,8 @@ class Book(models.Model):
         param authors: list authors
         :return: None
         """
+        for i in authors:
+            self.authors.add(i)
 
 
 
@@ -125,11 +147,13 @@ class Book(models.Model):
         param authors: list authors
         :return: None
         """
-
+        for i in authors:
+            self.authors.remove(i)
 
     @staticmethod
     def get_all():
         """
         returns data for json request with QuerySet of all books
         """
+        return list(Book.objects.all())
 

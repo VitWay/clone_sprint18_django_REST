@@ -99,97 +99,97 @@ class TestBookModel(TestCase):
         """ Test of the CustomUser.delete_by_id() method """
         self.assertFalse(Book.delete_by_id(999))
 
-    # def test_create_positive_name_description(self):
-    #     """ Positive Test of the CustomUser.create method """
-    #
-    #     book = Book.create(name="testBook", description="testDescription")
-    #     self.assertIsInstance(book, Book)
-    #     self.assertEqual(book.name, "testBook")
-    #     self.assertEqual(book.description, "testDescription")
-    #     self.assertEqual(book.count, 10)
-    #     self.assertListEqual(list(book.authors.all()), [])
-    #
-    # def test_create_positive_name_description_empty(self):
-    #     """ Positive Test of the CustomUser.create method """
-    #
-    #     book = Book.create(name="testBook", description="")
-    #     self.assertIsInstance(book, Book)
-    #     self.assertEqual(book.name, "testBook")
-    #     self.assertEqual(book.description, "")
-    #     self.assertEqual(book.count, 10)
-    #     self.assertListEqual(list(book.authors.all()), [])
-    #
-    # def test_create_positive_name_description_count(self):
-    #     """ Positive Test of the CustomUser.create method """
-    #
-    #     book = Book.create(name="testBook", description="testDescription", count=5)
-    #     self.assertIsInstance(book, Book)
-    #     self.assertEqual(book.name, "testBook")
-    #     self.assertEqual(book.description, "testDescription")
-    #     self.assertEqual(book.count, 5)
-    #     self.assertListEqual(list(book.authors.all()), [])
-    #
-    # def test_create_positive_name_description_count_a(self):
-    #     """ Positive Test of the CustomUser.create method """
-    #
-    #     book = Book.create(name="testBook", description="testDescription", count=5,
-    #                        authors=[self.author1, self.author2])
-    #     self.assertIsInstance(book, Book)
-    #     self.assertEqual(book.name, "testBook")
-    #     self.assertEqual(book.description, "testDescription")
-    #     self.assertEqual(book.count, 5)
-    #     self.assertListEqual(list(book.authors.all()), [self.author1, self.author2])
-    #
-    # def test_create_negative_len_name(self):
-    #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
-    #     book = Book.create(name="1" * 128, description="12")
-    #     self.assertIsInstance(book, Book)
-    #     book = Book.create(name="1" * 129, description="12")
-    #     self.assertIsNone(book)
-    #
-    # def test_get_all(self):
-    #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
-    #     books = Book.get_all()
-    #     books.sort(key=lambda book: book.id)
-    #     self.assertListEqual(books, [self.book1, self.book2, self.book3])
-    #
-    # def test_add_authors(self):
-    #     book = Book.objects.get(id=103)
-    #     book.add_authors([self.author2])
-    #
-    #     book = Book.objects.get(id=103)
-    #     self.assertListEqual(list(book.authors.all()), [self.author1, self.author2])
-    #
-    # def test_add_authors_duplicate(self):
-    #     book = Book.objects.get(id=103)
-    #     book.add_authors([self.author1, self.author2])
-    #
-    #     book = Book.objects.get(id=103)
-    #     self.assertListEqual(list(book.authors.all()), [self.author1, self.author2])
-    #
-    # def test_remove_authors(self):
-    #     book = Book.objects.get(id=103)
-    #     book.remove_authors([self.author1, self.author2])
-    #
-    #     book = Book.objects.get(id=103)
-    #     self.assertListEqual(list(book.authors.all()), [])
-    #
-    # def test_update(self):
-    #     book = Book.objects.get(id=101)
-    #     book.update(name="testName", description="testDescription", count=5)
-    #     book = Book.objects.get(id=101)
-    #     self.assertIsInstance(book, Book)
-    #     self.assertEqual(book.name, "testName")
-    #     self.assertEqual(book.description, "testDescription")
-    #     self.assertEqual(book.count, 5)
-    #     self.assertListEqual(list(book.authors.all()), [self.author1])
-    #
-    # def test_update_name(self):
-    #     book = Book.objects.get(id=101)
-    #     book.update(name="testName")
-    #     book = Book.objects.get(id=101)
-    #     self.assertIsInstance(book, Book)
-    #     self.assertEqual(book.name, "testName")
-    #     self.assertEqual(book.description, "description1")
-    #     self.assertEqual(book.count, 1)
-    #     self.assertListEqual(list(book.authors.all()), [self.author1])
+    def test_create_positive_name_description(self):
+        """ Positive Test of the CustomUser.create method """
+
+        book = Book.create(name="testBook", description="testDescription")
+        self.assertIsInstance(book, Book)
+        self.assertEqual(book.name, "testBook")
+        self.assertEqual(book.description, "testDescription")
+        self.assertEqual(book.count, 10)
+        self.assertListEqual(list(book.authors.all()), [])
+
+    def test_create_positive_name_description_empty(self):
+        """ Positive Test of the CustomUser.create method """
+
+        book = Book.create(name="testBook", description="")
+        self.assertIsInstance(book, Book)
+        self.assertEqual(book.name, "testBook")
+        self.assertEqual(book.description, "")
+        self.assertEqual(book.count, 10)
+        self.assertListEqual(list(book.authors.all()), [])
+
+    def test_create_positive_name_description_count(self):
+        """ Positive Test of the CustomUser.create method """
+
+        book = Book.create(name="testBook", description="testDescription", count=5)
+        self.assertIsInstance(book, Book)
+        self.assertEqual(book.name, "testBook")
+        self.assertEqual(book.description, "testDescription")
+        self.assertEqual(book.count, 5)
+        self.assertListEqual(list(book.authors.all()), [])
+
+    def test_create_positive_name_description_count_a(self):
+        """ Positive Test of the CustomUser.create method """
+
+        book = Book.create(name="testBook", description="testDescription", count=5,
+                           authors=[self.author1, self.author2])
+        self.assertIsInstance(book, Book)
+        self.assertEqual(book.name, "testBook")
+        self.assertEqual(book.description, "testDescription")
+        self.assertEqual(book.count, 5)
+        self.assertListEqual(list(book.authors.all()), [self.author1, self.author2])
+
+    def test_create_negative_len_name(self):
+        """ Positive Test of the CustomUser.create method TEST_DATE_END"""
+        book = Book.create(name="1" * 128, description="12")
+        self.assertIsInstance(book, Book)
+        book = Book.create(name="1" * 129, description="12")
+        self.assertIsNone(book)
+
+    def test_get_all(self):
+        """ Positive Test of the CustomUser.create method TEST_DATE_END"""
+        books = Book.get_all()
+        books.sort(key=lambda book: book.id)
+        self.assertListEqual(books, [self.book1, self.book2, self.book3])
+
+    def test_add_authors(self):
+        book = Book.objects.get(id=103)
+        book.add_authors([self.author2])
+
+        book = Book.objects.get(id=103)
+        self.assertListEqual(list(book.authors.all()), [self.author1, self.author2])
+
+    def test_add_authors_duplicate(self):
+        book = Book.objects.get(id=103)
+        book.add_authors([self.author1, self.author2])
+
+        book = Book.objects.get(id=103)
+        self.assertListEqual(list(book.authors.all()), [self.author1, self.author2])
+
+    def test_remove_authors(self):
+        book = Book.objects.get(id=103)
+        book.remove_authors([self.author1, self.author2])
+
+        book = Book.objects.get(id=103)
+        self.assertListEqual(list(book.authors.all()), [])
+
+    def test_update(self):
+        book = Book.objects.get(id=101)
+        book.update(name="testName", description="testDescription", count=5)
+        book = Book.objects.get(id=101)
+        self.assertIsInstance(book, Book)
+        self.assertEqual(book.name, "testName")
+        self.assertEqual(book.description, "testDescription")
+        self.assertEqual(book.count, 5)
+        self.assertListEqual(list(book.authors.all()), [self.author1])
+
+    def test_update_name(self):
+        book = Book.objects.get(id=101)
+        book.update(name="testName")
+        book = Book.objects.get(id=101)
+        self.assertIsInstance(book, Book)
+        self.assertEqual(book.name, "testName")
+        self.assertEqual(book.description, "description1")
+        self.assertEqual(book.count, 1)
+        self.assertListEqual(list(book.authors.all()), [self.author1])
