@@ -22,10 +22,6 @@ class Book(models.Model):
     count = models.IntegerField(default=10)
     authors = models.ManyToManyField(Author, related_name='author_books')
 
-
-
-
-
     def __str__(self):
         """
         Magic method is redefined to show all information about Book.
@@ -39,7 +35,6 @@ class Book(models.Model):
         :return: class, id
         """
         return f"{self.__class__.__name__}(id={self.id})"
-
 
     @staticmethod
     def get_by_id(book_id):
@@ -65,7 +60,6 @@ class Book(models.Model):
         except Book.DoesNotExist:
             return False
 
-
     @staticmethod
     def create(name, description, count=10, authors=None):
         """
@@ -88,7 +82,6 @@ class Book(models.Model):
         except DataError:
             return None
 
-
     def to_dict(self):
         """
         :return: book id, book name, book description, book count, book authors
@@ -109,7 +102,6 @@ class Book(models.Model):
             'authors': self.authors
         }
 
-
     def update(self, name=None, description=None, count=None):
         """
         Updates book in the database with the specified parameters.\n
@@ -129,7 +121,6 @@ class Book(models.Model):
             self.count = count
         self.save()
 
-
     def add_authors(self, authors):
         """
         Add  authors to  book in the database with the specified parameters.\n
@@ -138,8 +129,6 @@ class Book(models.Model):
         """
         for i in authors:
             self.authors.add(i)
-
-
 
     def remove_authors(self, authors):
         """
@@ -156,4 +145,3 @@ class Book(models.Model):
         returns data for json request with QuerySet of all books
         """
         return list(Book.objects.all())
-

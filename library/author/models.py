@@ -18,7 +18,6 @@ class Author(models.Model):
     surname = models.CharField(blank=True, max_length=20)
     patronymic = models.CharField(blank=True, max_length=20)
 
-
     def __str__(self):
         """
         Magic method is redefined to show all information about Author.
@@ -26,14 +25,12 @@ class Author(models.Model):
         """
         return f"'id': {self.id}, 'name': '{self.name}', 'surname': '{self.surname}', 'patronymic': '{self.patronymic}'"
 
-
     def __repr__(self):
         """
         This magic method is redefined to show class and id of Author object.
         :return: class, id
         """
         return f"{self.__class__.__name__}(id={self.id})"
-
 
     @staticmethod
     def get_by_id(author_id):
@@ -45,7 +42,6 @@ class Author(models.Model):
             return Author.objects.get(id=author_id)
         except Author.DoesNotExist:
             return None
-
 
     @staticmethod
     def delete_by_id(author_id):
@@ -59,9 +55,6 @@ class Author(models.Model):
             return True
         except Author.DoesNotExist:
             return False
-
-
-
 
     @staticmethod
     def create(name, surname, patronymic):
@@ -97,7 +90,6 @@ class Author(models.Model):
             'patronymic': self.patronymic,
         }
 
-
     def update(self,
                name=None,
                surname=None,
@@ -119,8 +111,6 @@ class Author(models.Model):
         if patronymic and len(patronymic) <= 20 and isinstance(patronymic, str):
             self.patronymic = patronymic
         self.save()
-
-
 
     @staticmethod
     def get_all():

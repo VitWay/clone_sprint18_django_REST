@@ -141,6 +141,16 @@ class TestOrderModel(TestCase):
         orders = Order.get_not_returned_books()
         self.assertListEqual(orders, [self.order1, self.order2])
 
+    def test_get_all(self):
+        """ Positive Test of the CustomUser.create method TEST_DATE_END"""
+        orders = Order.get_all()
+        self.assertListEqual(orders, [self.order1, self.order2, self.order3])
+
+    def test_get_not_returned_books(self):
+        """ Positive Test of the CustomUser.create method TEST_DATE_END"""
+        orders = Order.get_not_returned_books()
+        self.assertListEqual(orders, [self.order1, self.order2])
+
     def test_update_plated_end_at(self):
         order = Order.objects.get(id=101)
         new_date = TEST_DATE_END + datetime.timedelta(days=4)
