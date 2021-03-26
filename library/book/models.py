@@ -47,7 +47,10 @@ class Book(models.Model):
         :param book_id: SERIAL: the id of a Book to be found in the DB
         :return: book object or None if a book with such ID does not exist
         """
-
+        try:
+            return Book.objects.get(id=book_id)
+        except Book.DoesNotExist:
+            return None
 
     @staticmethod
     def delete_by_id(book_id):
@@ -56,7 +59,11 @@ class Book(models.Model):
         :type book_id: int
         :return: True if object existed in the db and was removed or False if it didn't exist
         """
-
+        try:
+            Book.objects.get(id=book_id).delete()
+            return True
+        except Book.DoesNotExist:
+            return False
 
 
     @staticmethod
