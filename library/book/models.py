@@ -74,12 +74,14 @@ class Book(models.Model):
         :return: a new book object which is also written into the DB
         """
         try:
+            if len(name) > 128:
+                raise ValueError
             book = Book.objects.create(name=name, description=description, count=count)
             if authors:
                 for i in authors:
                     book.authors.add(i)
             return book
-        except DataError:
+        except (DataError, IntegrityError, ValueError):
             return None
 
     def to_dict(self):

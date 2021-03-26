@@ -124,12 +124,13 @@ class CustomUser(AbstractBaseUser):
         """
 
         try:
-
+            if len(middle_name) > 20 or len(first_name) > 20 or len(last_name) > 20:
+                raise ValueError
             validate_email(email)
             user = CustomUser.objects.create(email=email, password=password,
                                              first_name=first_name, middle_name=middle_name, last_name=last_name)
             return user
-        except (DataError, IntegrityError, ValidationError):
+        except (DataError, IntegrityError, ValidationError, ValueError):
             pass
 
     def to_dict(self):

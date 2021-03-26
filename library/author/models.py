@@ -68,8 +68,10 @@ class Author(models.Model):
         :return: a new author object which is also written into the DB
         """
         try:
+            if len(surname) > 20:
+                raise ValueError
             return Author.objects.create(name=name, surname=surname, patronymic=patronymic)
-        except DataError:
+        except (DataError, IntegrityError, ValueError):
             return None
 
     def to_dict(self):
