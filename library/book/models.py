@@ -79,6 +79,14 @@ class Book(models.Model):
         type authors: list->Author
         :return: a new book object which is also written into the DB
         """
+        try:
+            book = Book.objects.create(name=name, description=description, count=count)
+            if authors:
+                for i in authors:
+                    book.authors.add(i)
+            return book
+        except DataError:
+            return None
 
 
     def to_dict(self):
@@ -132,4 +140,5 @@ class Book(models.Model):
         """
         returns data for json request with QuerySet of all books
         """
+        return list(Book.objects.all())
 

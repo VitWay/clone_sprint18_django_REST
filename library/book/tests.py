@@ -59,46 +59,46 @@ class TestBookModel(TestCase):
             self.order3 = Order(id=103, user=self.user, book=self.book3, end_at=TEST_DATE_END, plated_end_at=TEST_DATE)
             self.order3.save()
 
-    def test__str__(self):
-        """Test of the CustomUser.__str__() method"""
-        book_returned = str(Book.objects.get(id=101))
-        book_to_expect = "'id': 101, 'name': 'book1', 'description': 'description1', 'count': 1, 'authors': [101]"
-
-        self.assertEqual(book_returned, book_to_expect)
-
-    def test__repr__(self):
-        """Test of the CustomUser.__repr__() method"""
-        book_returned = repr(Book.objects.get(id=102))
-        book_to_expect = "Book(id=102)"
-
-        self.assertEqual(book_returned, book_to_expect)
-
-    def test_get_by_id_positive(self):
-        """Positive test of the CustomUser.get_by_id() method"""
-        book = Book.get_by_id(101)
-        self.assertEqual(book.id, 101)
-        self.assertEqual(book.name, 'book1')
-        self.assertEqual(book.description, "description1")
-        self.assertEqual(book.count, 1)
-        self.assertListEqual(list(book.authors.all()), [self.author1])
-
-    def test_get_by_id_negative(self):
-        """Negative test of the CustomUser.get_by_id() method"""
-        book = Book.get_by_id(999)
-        self.assertIsNone(book)
-
-    def test_delete_by_id_positive(self):
-        """ Test of the CustomUser.delete_by_id() method """
-        self.assertTrue(Book.delete_by_id(103))
-        self.assertRaises(Book.DoesNotExist, Book.objects.get, pk=103)
-        self.assertRaises(Order.DoesNotExist, Order.objects.get, pk=103)
-        self.assertEqual(self.author1, Author.objects.get(id=101))
-        self.assertEqual(self.author2, Author.objects.get(id=102))
-
-    def test_delete_by_id_negative(self):
-        """ Test of the CustomUser.delete_by_id() method """
-        self.assertFalse(Book.delete_by_id(999))
-
+    # def test__str__(self):
+    #     """Test of the CustomUser.__str__() method"""
+    #     book_returned = str(Book.objects.get(id=101))
+    #     book_to_expect = "'id': 101, 'name': 'book1', 'description': 'description1', 'count': 1, 'authors': [101]"
+    #
+    #     self.assertEqual(book_returned, book_to_expect)
+    #
+    # def test__repr__(self):
+    #     """Test of the CustomUser.__repr__() method"""
+    #     book_returned = repr(Book.objects.get(id=102))
+    #     book_to_expect = "Book(id=102)"
+    #
+    #     self.assertEqual(book_returned, book_to_expect)
+    #
+    # def test_get_by_id_positive(self):
+    #     """Positive test of the CustomUser.get_by_id() method"""
+    #     book = Book.get_by_id(101)
+    #     self.assertEqual(book.id, 101)
+    #     self.assertEqual(book.name, 'book1')
+    #     self.assertEqual(book.description, "description1")
+    #     self.assertEqual(book.count, 1)
+    #     self.assertListEqual(list(book.authors.all()), [self.author1])
+    #
+    # def test_get_by_id_negative(self):
+    #     """Negative test of the CustomUser.get_by_id() method"""
+    #     book = Book.get_by_id(999)
+    #     self.assertIsNone(book)
+    #
+    # def test_delete_by_id_positive(self):
+    #     """ Test of the CustomUser.delete_by_id() method """
+    #     self.assertTrue(Book.delete_by_id(103))
+    #     self.assertRaises(Book.DoesNotExist, Book.objects.get, pk=103)
+    #     self.assertRaises(Order.DoesNotExist, Order.objects.get, pk=103)
+    #     self.assertEqual(self.author1, Author.objects.get(id=101))
+    #     self.assertEqual(self.author2, Author.objects.get(id=102))
+    #
+    # def test_delete_by_id_negative(self):
+    #     """ Test of the CustomUser.delete_by_id() method """
+    #     self.assertFalse(Book.delete_by_id(999))
+    #
     # def test_create_positive_name_description(self):
     #     """ Positive Test of the CustomUser.create method """
     #
@@ -146,13 +146,13 @@ class TestBookModel(TestCase):
     #     self.assertIsInstance(book, Book)
     #     book = Book.create(name="1" * 129, description="12")
     #     self.assertIsNone(book)
-    #
+
     # def test_get_all(self):
     #     """ Positive Test of the CustomUser.create method TEST_DATE_END"""
     #     books = Book.get_all()
     #     books.sort(key=lambda book: book.id)
     #     self.assertListEqual(books, [self.book1, self.book2, self.book3])
-    #
+
     # def test_add_authors(self):
     #     book = Book.objects.get(id=103)
     #     book.add_authors([self.author2])
