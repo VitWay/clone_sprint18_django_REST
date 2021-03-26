@@ -11,7 +11,7 @@ class Order(models.Model):
     end_at = models.DateTimeField(null=True)
     plated_end_at = models.DateTimeField(null=True)
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
-    book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True)
 
 
     def __str__(self):

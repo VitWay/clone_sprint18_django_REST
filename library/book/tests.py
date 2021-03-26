@@ -73,32 +73,32 @@ class TestBookModel(TestCase):
 
         self.assertEqual(book_returned, book_to_expect)
 
-    # def test_get_by_id_positive(self):
-    #     """Positive test of the CustomUser.get_by_id() method"""
-    #     book = Book.get_by_id(101)
-    #     self.assertEqual(book.id, 101)
-    #     self.assertEqual(book.name, 'book1')
-    #     self.assertEqual(book.description, "description1")
-    #     self.assertEqual(book.count, 1)
-    #     self.assertListEqual(list(book.authors.all()), [self.author1])
-    #
-    # def test_get_by_id_negative(self):
-    #     """Negative test of the CustomUser.get_by_id() method"""
-    #     book = Book.get_by_id(999)
-    #     self.assertIsNone(book)
-    #
-    # def test_delete_by_id_positive(self):
-    #     """ Test of the CustomUser.delete_by_id() method """
-    #     self.assertTrue(Book.delete_by_id(103))
-    #     self.assertRaises(Book.DoesNotExist, Book.objects.get, pk=103)
-    #     self.assertRaises(Order.DoesNotExist, Order.objects.get, pk=103)
-    #     self.assertEqual(self.author1, Author.objects.get(id=101))
-    #     self.assertEqual(self.author2, Author.objects.get(id=102))
-    #
-    # def test_delete_by_id_negative(self):
-    #     """ Test of the CustomUser.delete_by_id() method """
-    #     self.assertFalse(Book.delete_by_id(999))
-    #
+    def test_get_by_id_positive(self):
+        """Positive test of the CustomUser.get_by_id() method"""
+        book = Book.get_by_id(101)
+        self.assertEqual(book.id, 101)
+        self.assertEqual(book.name, 'book1')
+        self.assertEqual(book.description, "description1")
+        self.assertEqual(book.count, 1)
+        self.assertListEqual(list(book.authors.all()), [self.author1])
+
+    def test_get_by_id_negative(self):
+        """Negative test of the CustomUser.get_by_id() method"""
+        book = Book.get_by_id(999)
+        self.assertIsNone(book)
+
+    def test_delete_by_id_positive(self):
+        """ Test of the CustomUser.delete_by_id() method """
+        self.assertTrue(Book.delete_by_id(103))
+        self.assertRaises(Book.DoesNotExist, Book.objects.get, pk=103)
+        self.assertRaises(Order.DoesNotExist, Order.objects.get, pk=103)
+        self.assertEqual(self.author1, Author.objects.get(id=101))
+        self.assertEqual(self.author2, Author.objects.get(id=102))
+
+    def test_delete_by_id_negative(self):
+        """ Test of the CustomUser.delete_by_id() method """
+        self.assertFalse(Book.delete_by_id(999))
+
     # def test_create_positive_name_description(self):
     #     """ Positive Test of the CustomUser.create method """
     #
