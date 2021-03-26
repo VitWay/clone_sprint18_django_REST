@@ -80,32 +80,32 @@ class TestOrderModel(TestCase):
 
         self.assertEqual(user_returned, user_to_expect)
 
-    # def test_get_by_id_positive(self):
-    #     """Positive test of the CustomUser.get_by_id() method"""
-    #     order = Order.get_by_id(101)
-    #     self.assertEqual(order.id, 101)
-    #     self.assertEqual(order.user, self.user)
-    #     self.assertEqual(order.book, self.book1)
-    #     self.assertEqual(order.created_at, TEST_DATE)
-    #     self.assertEqual(order.end_at, None)
-    #     self.assertEqual(order.plated_end_at, TEST_DATE)
-    #
-    # def test_get_by_id_negative(self):
-    #     """Negative test of the CustomUser.get_by_id() method"""
-    #     order = Order.get_by_id(55)
-    #     self.assertIsNone(order)
-    #
-    # def test_delete_by_id_positive(self):
-    #     """ Test of the CustomUser.delete_by_id() method """
-    #     self.assertTrue(Order.delete_by_id(103))
-    #     self.assertRaises(Order.DoesNotExist, Order.objects.get, pk=103)
-    #     self.assertEqual(self.book3, Book.objects.get(id=103))
-    #     self.assertEqual(self.user, CustomUser.objects.get(id=111))
-    #
-    # def test_delete_by_id_negative(self):
-    #     """ Test of the CustomUser.delete_by_id() method """
-    #     self.assertFalse(Order.delete_by_id(999))
-    #
+    def test_get_by_id_positive(self):
+        """Positive test of the CustomUser.get_by_id() method"""
+        order = Order.get_by_id(101)
+        self.assertEqual(order.id, 101)
+        self.assertEqual(order.user, self.user)
+        self.assertEqual(order.book, self.book1)
+        self.assertEqual(order.created_at, TEST_DATE)
+        self.assertEqual(order.end_at, None)
+        self.assertEqual(order.plated_end_at, TEST_DATE)
+
+    def test_get_by_id_negative(self):
+        """Negative test of the CustomUser.get_by_id() method"""
+        order = Order.get_by_id(55)
+        self.assertIsNone(order)
+
+    def test_delete_by_id_positive(self):
+        """ Test of the CustomUser.delete_by_id() method """
+        self.assertTrue(Order.delete_by_id(103))
+        self.assertRaises(Order.DoesNotExist, Order.objects.get, pk=103)
+        self.assertEqual(self.book3, Book.objects.get(id=103))
+        self.assertEqual(self.user, CustomUser.objects.get(id=111))
+
+    def test_delete_by_id_negative(self):
+        """ Test of the CustomUser.delete_by_id() method """
+        self.assertFalse(Order.delete_by_id(999))
+
     # def test_create_positive(self):
     #     """ Positive Test of the CustomUser.create method """
     #     time_mock = datetime.datetime(2017, 4, 10, 12, 00, tzinfo=pytz.utc)

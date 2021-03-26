@@ -41,7 +41,10 @@ class Order(models.Model):
 
     @staticmethod
     def get_by_id(order_id):
-        pass
+        try:
+            return Order.objects.get(id=order_id)
+        except Order.DoesNotExist:
+            return None
 
     def update(self, plated_end_at=None, end_at=None):
         pass
@@ -56,4 +59,7 @@ class Order(models.Model):
 
     @staticmethod
     def delete_by_id(order_id):
-        pass
+        try:
+            return Order.objects.get(id=order_id).delete()
+        except Order.DoesNotExist:
+            return None
