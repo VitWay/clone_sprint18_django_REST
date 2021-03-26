@@ -18,7 +18,7 @@ class Order(models.Model):
         Magic method is redefined to show all information about Book.
         :return: book id, book name, book description, book count, book authors
         """
-        end_at = f"'{self.end_at}'" if self.end_at is not None else None
+        end_at = f"'{self.end_at}'" if self.end_at else None
 
         return f"'id': {self.id}, 'user': {self.user.__class__.__name__}(id={self.user.id})," \
                f" 'book': {self.book.__class__.__name__}(id={self.book.id}), " \
@@ -38,7 +38,10 @@ class Order(models.Model):
     @staticmethod
     def create(user, book, plated_end_at):
         try:
+            if book.count <= 1:
+                raise ValueError
             order = Order.objects.create(user=user, book=book, plated_end_at=plated_end_at)
+            book.count -= 1
             return order
         except (DataError, IntegrityError, ValueError):
             return None
@@ -51,7 +54,11 @@ class Order(models.Model):
             return None
 
     def update(self, plated_end_at=None, end_at=None):
-        pass
+        if plated_end_at:
+            self.plated_end_at = plated_end_at
+        if end_at:
+            self.end_at = end_at
+        self.save()
 
     @staticmethod
     def get_all():
