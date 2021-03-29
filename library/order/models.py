@@ -33,7 +33,14 @@ class Order(models.Model):
         return f'{self.__class__.__name__}(id={self.id})'
 
     def to_dict(self):
-        pass
+        return {
+            'id': self.id,
+            'user': self.user,
+            'book': self.book,
+            'created_at': str(self.created_at),
+            'end_at': str(self.end_at) if self.end_at else self.end_at,
+            'plated_end_at': str(self.plated_end_at)
+        }
 
     @staticmethod
     def create(user, book, plated_end_at):
