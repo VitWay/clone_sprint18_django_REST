@@ -1,16 +1,14 @@
 from django.db import models, DataError, IntegrityError
 
-from authentication.models import CustomUser
-from author.models import Author
-from book.models import Book
-import datetime
+from api.v1.authentication.models import CustomUser
+from api.v1.book.models import Book
 
 
 class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     end_at = models.DateTimeField(null=True)
     plated_end_at = models.DateTimeField(null=True)
-    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name="user_by_order")
     book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True)
 
     def __str__(self):

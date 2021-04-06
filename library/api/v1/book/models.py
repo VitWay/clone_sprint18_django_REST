@@ -1,6 +1,6 @@
 from django.db import models, IntegrityError, DataError
 
-from author.models import Author
+from api.v1.author.models import Author
 
 
 class Book(models.Model):
